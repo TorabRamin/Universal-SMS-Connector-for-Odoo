@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sms_log_tree" model="ir.ui.view">
+        <field name="name">sms.log.tree</field>
+        <field name="model">sms.log</field>
+        <field name="arch" type="xml">
+            <list create="0" delete="0" decoration-danger="state == 'failed'" decoration-success="state == 'delivered'" decoration-info="state == 'sent'">
+                <field name="create_date"/>
+                <field name="mobile"/>
+                <field name="provider_id"/>
+                <field name="api_response_id"/>
+                <field name="retry_count"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_sms_log_form" model="ir.ui.view">
+        <field name="name">sms.log.form</field>
+        <field name="model">sms.log</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="mobile"/>
+                            <field name="create_date"/>
+                            <field name="provider_id"/>
+                        </group>
+                        <group>
+                            <field name="api_response_id"/>
+                            <field name="retry_count"/>
+                        </group>
+                    </group>
+                    <field name="message" readonly="1"/>
+                    <notebook>
+                        <page string="Technical Data">
+                            <field name="api_response_dump"/>
+                            <field name="error_message"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

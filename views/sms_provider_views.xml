@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sms_provider_form" model="ir.ui.view">
+        <field name="name">sms.provider.form</field>
+        <field name="model">sms.provider</field>
+        <field name="arch" type="xml">
+            <form string="SMS Provider">
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="e.g. Boomcast"/></h1>
+                    </div>
+                    <group>
+                        <group string="Configuration">
+                            <field name="provider_type"/>
+                            <field name="priority"/>
+                            <field name="sender_id"/>
+                        </group>
+                        <group string="API Credentials">
+                            <field name="api_url" invisible="provider_type == 'aws_sns'"/>
+                            <field name="api_username" invisible="provider_type == 'aws_sns'"/>
+                            <field name="api_password" password="True" invisible="provider_type == 'aws_sns'"/>
+                            <field name="api_key" password="True"/>
+                        </group>
+                    </group>
+                    <group string="Provider Specifics">
+                        <field name="mimsms_campaign_id" invisible="provider_type != 'mimsms'"/>
+                        <field name="aws_region_name" invisible="provider_type != 'aws_sns'"/>
+                        <field name="aws_access_key" invisible="provider_type != 'aws_sns'"/>
+                        <field name="aws_secret_key" invisible="provider_type != 'aws_sns'"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sms_provider_tree" model="ir.ui.view">
+        <field name="name">sms.provider.tree</field>
+        <field name="model">sms.provider</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="priority" widget="handle"/> 
+                <field name="name"/>
+                <field name="provider_type"/>
+                <field name="state" widget="badge" decoration-success="state == 'enabled'" decoration-muted="state == 'disabled'"/>
+            </list>
+        </field>
+    </record>
+</odoo>

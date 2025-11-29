@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sms_provider,sms.provider,model_sms_provider,base.group_user,1,1,1,1
+access_sms_log,sms.log,model_sms_log,base.group_user,1,1,1,1
+access_sms_compose_wizard,sms.compose.wizard,model_sms_compose_wizard,base.group_user,1,1,1,1
